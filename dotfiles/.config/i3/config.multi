@@ -879,23 +879,10 @@ for_window [class="Xchm" instance="xchm"]  move scratchpad
 
 
 ############
-#         INIT           #
+#  INIT    #
 ############
 
 #Background
 # exec --no-startup-id feh --recursive --randomize --bg-scale $wallpaperPath &
 
-# Compton config
-# Auto-Start
-# gnome
-# exec --no-startup-id /usr/libexec/gnome-settings-daemon
-# exec --no-startup-id /usr/bin/compton -bG --config ~/.i3/compton.conf
-# Devilspie  (used with transset to provide transparency for urxvt/ranger hack)
-# exec --no-startup-id /usr/bin/devilspie -a &
-# Dunst
 exec --no-startup-id /usr/bin/dunst &
-
-# new_window normal
-# new_float pixel 2
-# hide_edge_borders  none
-# bindsym $winKeyL+b border toggle
