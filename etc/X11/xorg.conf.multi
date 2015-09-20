@@ -1,0 +1,209 @@
+Section "Files"
+    FontPath        "/usr/share/fonts/100dpi"
+    FontPath        "/usr/share/fonts/75dpi"
+    FontPath        "/usr/share/fonts/adobe-source-code-pro"
+    FontPath        "/usr/share/fonts/adobe-source-sans-pro"
+    FontPath        "/usr/share/fonts/adobe-source-serif-pro"
+    FontPath        "/usr/share/fonts/cyrillic"
+    FontPath        "/usr/share/fonts/encodings"
+    FontPath        "/usr/share/fonts/encodings/large"
+    FontPath        "/usr/share/fonts/misc"
+    FontPath        "/usr/share/fonts/OTF"
+    FontPath        "/usr/share/fonts/roboto"
+    FontPath        "/usr/share/fonts/t1-paratype-ibx"
+    FontPath        "/usr/share/fonts/TTF"
+    FontPath        "/usr/share/fonts/ttf-droid-ib"
+    FontPath        "/usr/share/fonts/ttf-opensans-ib"
+    FontPath        "/usr/share/fonts/Type1"
+    FontPath        "/usr/share/fonts/util"
+EndSection
+
+Section "Module"
+    Load           "dbe"
+    Load           "extmod"
+    Load           "type1"
+    Load           "freetype"
+    Load           "glx"
+    Load           "dri"
+    Load           "drm"
+EndSection
+
+
+Section "InputDevice"
+
+    # generated from default
+    Identifier     "Mouse0"
+    Driver         "mouse"
+    Option         "Protocol" "auto"
+    Option         "Device" "/dev/psaux"
+    Option         "Emulate3Buttons" "no"
+    Option         "ZAxisMapping" "4 5"
+EndSection
+
+Section "InputDevice"
+
+    # generated from default
+    Identifier     "Keyboard0"
+    Driver         "kbd"
+EndSection
+
+
+
+
+Section "Monitor"
+    Identifier     "Monitor0"
+    VendorName     "Unknown"
+    ModelName      "HP w1907"
+    HorizSync       24.0 - 83.0
+    VertRefresh     50.0 - 76.0
+    Option         "DPMS" "false"
+#   Option         "Primary" "true"
+#   Option         "DPI" "89 x 87"
+EndSection
+
+Section "Monitor"
+    Identifier     "Monitor1"
+    VendorName     "Unknown"
+    ModelName      "LG Electronics W1943"
+    HorizSync       30.0 - 61.0
+    VertRefresh     56.0 - 75.0
+    Option         "DPMS" "false"
+#   Option         "DPI"   "84 x 84"
+EndSection
+
+Section "Monitor"
+    Identifier     "Monitor2"
+    VendorName     "Unknown"
+    ModelName      "LG Electronics W1943"
+    HorizSync       30.0 - 61.0
+    VertRefresh     56.0 - 75.0
+    Option         "DPMS" "false"
+#   Option         "DPI"   "84 x 84"
+EndSection
+
+
+
+
+Section "Screen"
+    Identifier     "Screen0"
+    Device         "Device0"
+    Monitor        "Monitor0"
+#   DefaultDepth    32
+    Option         "Stereo" "0"
+    Option         "nvidiaXineramaInfoOrder" "CRT-0"
+#   Option         "metamodes" "1440x900 +0+0 { ForceFullCompositionPipeline = On }"
+#   Option         "metamodes" "1440x900 +0+0"
+#Option "AllowGLXWithComposite" "True"
+    Option         "metamodes" "nvidia-auto-select +0+0"
+    SubSection     "Display"
+        Depth       24
+    EndSubSection
+EndSection
+
+Section "Screen"
+    Identifier     "Screen1"
+    Device         "Device1"
+    Monitor        "Monitor1"
+#   DefaultDepth    32
+    Option         "Stereo" "0"
+#   Option         "metamodes" "DFP-0: nvidia-auto-select +0+0; DFP-0: nvidia-auto-select +0+0; DFP-0: 1024x768 +0+0; DFP-0: 1024x768_60 +0+0; DFP-0: 800x600 +0+0; DFP-0: 800x600_60 +0+0; DFP-0: 640x480 +0+0; DFP-0: 640x480_60 +0+0; DFP-0: nvidia-auto-select +0+0; DFP-0: nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+#Option "AllowGLXWithComposite" "True"
+     Option         "metamodes" "DFP-0: nvidia-auto-select +0+0"
+    SubSection     "Display"
+        Depth       24
+    EndSubSection
+EndSection
+
+Section "Screen"
+    Identifier     "Screen2"
+    Device         "Device2"
+    Monitor        "Monitor2"
+#   DefaultDepth    32
+    Option         "Stereo" "0"
+#   Option         "metamodes" "DFP-1: nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+    Option         "metamodes" "DFP-1: nvidia-auto-select +0+0"
+    #Option "DPI" "96x96"
+#Option "AllowGLXWithComposite" "True" 
+   SubSection     "Display"
+        Depth       24
+    EndSubSection
+EndSection
+
+Section "ServerLayout"
+    Identifier     "Layout0"
+    Screen      0  "Screen0" 1360 0
+    Screen      1  "Screen1" 0 66
+    Screen      2  "Screen2" 2800 66
+    InputDevice    "Keyboard0" "CoreKeyboard"
+    InputDevice    "Mouse0" "CorePointer"
+    Option         "Xinerama" "1"
+    Option         "StandbyTime" "0"
+    Option         "SuspendTime" "0"
+    Option         "BlankTime" "0"
+#    Option 	   "OffTime" "0"
+
+#   Option         "AIGLX" "1" 
+#   Option         "BlankTime" "0"
+#   Option         "Pixmap" "32"
+EndSection
+
+
+Section "Extensions"
+    Option         "Composite" "Disable"
+#    Option         "Composite" "Enable"
+EndSection
+
+Section "Device"
+    Identifier     "Device0"
+    Driver         "nvidia"
+    VendorName     "NVIDIA Corporation"
+    BoardName      "GeForce 7050 / nForce 610i"
+    BusID          "PCI:0:16:0"
+#    Option         "AllowGLXWithComposite" "True"
+#    Option         "AddARGBGLXVisuals" "True"
+    Option         "DamageEvents" "true"
+    Option         "Coolbits" "1"
+    Option         "TripleBuffer" "false"
+    Option         "DamageEvents" "true"
+    Option         "DisableGLXRootClipping" "true"
+    Option         "OnDemandVBlankInterrupts" "true"
+    Option         "Accel" "true" 
+    Option         "RenderAccel" "true"
+    Option         "NoFlip" "false"
+    Option         "MultisampleCompatibility" "false"
+    Option         "UseEvents"    "false"
+#    Option         "ZaphodHeads" "VGA-1"
+EndSection
+
+Section "Device"
+    Identifier     "Device1"
+    Driver         "nvidia"
+    VendorName     "NVIDIA Corporation"
+    BoardName      "GeForce 7900 GS"
+    BusID          "PCI:2:0:0"
+    Screen          0
+#    Option          "AllowGLXWithComposite" "True"
+#    Option         "AddARGBGLXVisuals" "True"
+    Option         "DamageEvents" "true"
+    Option         "Coolbits" "1"
+    Option         "TripleBuffer" "false"
+    Option         "DamageEvents" "true"
+    Option         "DisableGLXRootClipping" "true"
+    Option         "OnDemandVBlankInterrupts" "true"
+    Option         "Accel" "true" 
+    Option         "RenderAccel" "true"
+    Option "NoFlip" "false"
+    Option "MultisampleCompatibility" "false"
+    Option         "UseEvents"    "false"
+ #   Option         "ZaphodHeads" "DFP-I-1"
+EndSection
+
+Section "Device"
+    Identifier     "Device2"
+    Driver         "nvidia"
+    VendorName     "NVIDIA Corporation"
+    BoardName      "GeForce 7900 GS"
+    BusID          "PCI:2:0:0"
+    Screen          1
+#    Option         "ZaphodHeads" "DFP-I-2"
+EndSection
