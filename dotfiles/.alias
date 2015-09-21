@@ -1,0 +1,36 @@
+
+# list files directory first
+alias ls='ls -F --group-directories-first --color=auto'
+# list hidden files, to include directories themselves use 'ls -dF .*' instead
+alias ls.='ls -dF .[a-zA-Z0-9]* --group-directories-first --color=auto'
+
+# long listing format normal
+alias lsl='ls -lahF --group-directories-first --color=auto'
+
+# long listing format hidden
+alias ls.l='ls -lahF --group-directories-first --color=auto'
+
+# long listing format all
+alias ll='ls -lahF --group-directories-first --color=auto'
+
+# what's happening?
+alias rm='rm -i -v'
+alias cp='cp -i -v'
+alias mv='mv -i -v'
+alias rmdir='rmdir -v'
+
+# parents folder?, do it for me please
+alias mkdir='mkdir -p -v'
+
+# colorize output
+alias tree='tree -C'
+
+# ANSI color escape sequence
+alias less='less -R'
+
+# display line numbers
+alias grep='grep -n --color=auto'
+
+
+alias logmulti='php $HOME/repos/linuxstuff/phpwhat/login.php --user=walbarda --display=multihead --log-normal'
+alias logsingle='php $HOME/repos/linuxstuff/phpwhat/login.php --user=walbarda --display=singlehead --log=normal'
