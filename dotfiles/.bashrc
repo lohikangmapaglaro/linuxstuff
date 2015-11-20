@@ -5,17 +5,30 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# is readable?
-[ -r /etc/profile.d/command-not-found.bash ] && . /etc/profile.d/command-not-found.bash
+alias ls='ls --color=auto'
+PS1='[\u@\h \W]\$ '
+
+
+#numlock on
+#setleds +num
+
+# init prompt
+[ -r /etc/profile.d/set-prompt.sh ] && . /etc/profile.d/set-prompt.sh
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
 
 # Source the aliases from separate file
 if [ -e $HOME/.alias ]; then
-	  [ -n "$PS1" ] && . $HOME/.alias
+          [ -n "$PS1" ] && . $HOME/.alias
 fi
 
 
 # list dir after changing dir
-cd() {
+cd(){
     if [ -n "$1" ]; then
         builtin cd "$@" && ls
     else
@@ -42,7 +55,7 @@ mvg() {
 }
 
 # copy with progress BAR
-cpv() {
+cpv(){
 
     local USAGE="Jr focus! Usage:$0 SOURCE1 SOURCE2 SOURCE3 ... SOURCE DEST/"
     local ARGS=("$@")
@@ -52,7 +65,7 @@ cpv() {
            bar -o "${ARGS[1]}" "${ARGS[0]}"
        elif [ -d "${ARGS[-1]}" ]; then
            local SOURCEDEST=${ARGS[-1]}
-	       unset ARGS[$#-1]
+               unset ARGS[$#-1]
            bar -c 'cat > '"$SOURCEDEST"'/${bar_file} ' "${ARGS[@]}"
        else
            bar -o "${ARGS[1]}" "${ARGS[0]}"
@@ -64,15 +77,14 @@ cpv() {
 
 # shot - takes a screenshot of your current window
 snip(){
-	import -frame -strip -quality 75 "$HOME/$(date +%s).png"
+        import -frame -strip -quality 75 "$HOME/$(date +%s).png"
 }
+
 
 # backup files and folder
 backup(){
-	cp -R $1 ${1}-`date +%Y%m%d%H%M`.backup ;
+        cp -R $1 ${1}-`date +%Y%m%d%H%M`.backup ;
 }
-
-
 
 
 # concatenating files with progress BAR
@@ -83,7 +95,7 @@ catwrite(){
     if [ $# -ge "2" ]; then
        if [ -f "${ARGS[-1]}" ]; then
            local SOURCEFILE=${ARGS[-1]}
-	       unset ARGS[$#-1]
+               unset ARGS[$#-1]
            bar "${ARGS[@]}" > "$SOURCEFILE"
        else
            bar "${ARGS[0]}" > "${ARGS[1]}"
@@ -94,7 +106,6 @@ catwrite(){
 
 }
 
-
 # write into file with progress BAR
 catappend(){
     local USAGE="Jr what are you doing?? Usage:$0 SRCFILE1 SRCFILE2 SRCFILE3 ... DESTFILE"
@@ -103,7 +114,7 @@ catappend(){
     if [ $# -ge "2" ]; then
        if [ -f "${ARGS[-1]}" ]; then
            local SOURCEFILE=${ARGS[-1]}
-	       unset ARGS[$#-1]
+               unset ARGS[$#-1]
            bar "${ARGS[@]}" >> "$SOURCEFILE"
        else
            bar "${ARGS[0]}" >> "${ARGS[1]}"
@@ -113,6 +124,7 @@ catappend(){
     fi
 
 }
+
 
 
 # note taker
@@ -130,13 +142,13 @@ notes() {
     fi
 
     if ! (($#)); then
-		# display notes
+                # display notes
         cat "$HOME/.notes"
     elif [[ "$1" == "-l" ]]; then
         # display notes with body numbering
         nl -b a "$HOME/.notes"
     elif [[ "$1" == "-c" ]]; then
-		# clear notes
+                # clear notes
        printf "%s" > $HOME/.notes
     elif [[ "$1" == "-r" ]]; then
         nl -b a "$HOME/.notes"
@@ -154,21 +166,22 @@ notes() {
 # eg. ipinfo 223.25.10.75
 ipinfo() {
     if grep -P "(([1-9]\d{0,2})\.){3}(?2)" <<< "$1"; then
-	curl ipinfo.io/"$1"
+        curl ipinfo.io/"$1"
     else
-	ipawk=($(host "$1" | awk '/address/ { print $NF }'))
-	curl ipinfo.io/${ipawk[1]}
+        ipawk=($(host "$1" | awk '/address/ { print $NF }'))
+        curl ipinfo.io/${ipawk[1]}
     fi
     echo
 }
 
 
-#	myip - finds your current IP if your connected to the internet
+
+
+
+#       myip - finds your current IP if your connected to the internet
 myip(){
-	lynx -dump -hiddenlinks=ignore -nolist http://checkip.dyndns.org:8245/ | awk '{ print $4 }' | sed '/^$/d; s/^[ ]*//g; s/[ ]*$//g'
+        lynx -dump -hiddenlinks=ignore -nolist http://checkip.dyndns.org:8245/ | awk '{ print $4 }' | sed '/^$/d; s/^[ ]*//g; s/[ ]*$//g'
 }
-
-
 
 #dirsize - finds directory sizes and lists them for the current directory
 dirsize ()
@@ -193,9 +206,6 @@ echo "${myip}"
 echo "---------------------------------------------------"
 }
 
-
-
-
 # Filenames to lowercase. Ex.. lowercase * = All file in the current dir.
 lowercase()
 {
@@ -216,47 +226,54 @@ lowercase()
 done
 }
 
+
+
 # System Info
 sysinfo(){
-	clear
-	num_cpus=`cat /proc/cpuinfo | grep -c "model name"`
-	machine_cpu=`cat /proc/cpuinfo | grep -m 1 "model name" | cut -d: -f2`
-	machine_mhz=`cat /proc/cpuinfo | grep -m 1 "cpu MHz" | cut -d: -f2`
-	machine_cpuinfo=`uname -mp`
-	todays_date=`date +"%D %r"`
-	machine_uptime=`uptime`
-	machine_ram=`cat /proc/meminfo | grep -m 1 "MemTotal:" | cut -d: -f2 |  sed 's/^[ \t]*//'`
-	machine_video=`lspci | grep -m 1 "VGA" | cut -d: -f3 |  sed 's/^[ \t]*//'`
-	machine_eth_card=`lspci | grep -m 1 "Ethernet" | cut -d: -f3 |  sed 's/^[ \t]*//'`
-	machine_audio_controller=`lspci | grep -m 1 "audio" | cut -d: -f3 |  sed 's/^[ \t]*//'`
-	arch_damons=`grep "DAEMONS=" /etc/rc.conf `
-	last_logins=`last | head`
-	eth0info=`ifconfig eth0 | grep "inet addr:" | sed 's/inet addr/Local IP/g' | sed 's/^[ \t]*//;s/[ \t]*$//'`
+        clear
+        num_cpus=`cat /proc/cpuinfo | grep -c "model name"`
+        machine_cpu=`cat /proc/cpuinfo | grep -m 1 "model name" | cut -d: -f2`
+        machine_mhz=`cat /proc/cpuinfo | grep -m 1 "cpu MHz" | cut -d: -f2`
+        machine_cpuinfo=`uname -mp`
+        todays_date=`date +"%D %r"`
+        machine_uptime=`uptime`
+        machine_ram=`cat /proc/meminfo | grep -m 1 "MemTotal:" | cut -d: -f2 |  sed 's/^[ \t]*//'`
+        machine_video=`lspci | grep -m 1 "VGA" | cut -d: -f3 |  sed 's/^[ \t]*//'`
+        machine_eth_card=`lspci | grep -m 1 "Ethernet" | cut -d: -f3 |  sed 's/^[ \t]*//'`
+        machine_audio_controller=`lspci | grep -m 1 "audio" | cut -d: -f3 |  sed 's/^[ \t]*//'`
+        arch_damons=`grep "DAEMONS=" /etc/rc.conf `
+        last_logins=`last | head`
+        eth0info=`ifconfig eth0 | grep "inet addr:" | sed 's/inet addr/Local IP/g' | sed 's/^[ \t]*//;s/[ \t]*$//'`
 
-	echo "ARCH LINUX - Machine Information Script ver .10"
-	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-	echo "DATE: $todays_date   MACHINE NAME: $HOSTNAME  "
-	echo " "
-	echo "Eth0: $eth0info"
-	echo "ETHERNET CARD: $machine_eth_card"
-	echo "CPU INFO: Qty=$num_cpus $machine_cpuinfo"
-	echo "VIDEO CARD: $machine_video"
-	echo "AUDIO CONTROLLER: $machine_audio_controller"
-	echo "RAM INFO: $machine_ram"
-	echo " "
-	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-	route
-	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-	echo "DISK USAGE:"
-	df -h
-	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-	echo "UPTIME: $machine_uptime"
-	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-	echo "$arch_damons"
-	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        echo "ARCH LINUX - Machine Information Script ver .10"
+        echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        echo "DATE: $todays_date   MACHINE NAME: $HOSTNAME  "
+        echo " "
+        echo "Eth0: $eth0info"
+        echo "ETHERNET CARD: $machine_eth_card"
+        echo "CPU INFO: Qty=$num_cpus $machine_cpuinfo"
+        echo "VIDEO CARD: $machine_video"
+        echo "AUDIO CONTROLLER: $machine_audio_controller"
+        echo "RAM INFO: $machine_ram"
+        echo " "
+        echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        route
+        echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        echo "DISK USAGE:"
+        df -h
+        echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        echo "UPTIME: $machine_uptime"
+        echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        echo "$arch_damons"
+        echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+}
+
+# formatted mount
+fmount(){
+        (echo "DEVICE PATH TYPE FLAGS" && mount | awk '$2=$4="";1') | column -t ;
 }
 
 
- [ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
-
+# is readable?
+[ -r /etc/profile.d/command-not-found.bash ] && . /etc/profile.d/command-not-found.bash
 

@@ -1,0 +1,4 @@
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+
+ set show-all-if-ambiguous on
+# set show-all-if-unmodified on

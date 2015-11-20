@@ -1,0 +1,181 @@
+
+
+#include "/home/walbarda/.config/themes/general.resources"
+
+! #################################
+! #         XCURSOR               #
+! #################################
+
+Xcursor.theme: vanilla-dmz
+Xcursor.size:  8
+
+
+! #################################
+! #             URXVT             #
+! #################################
+
+
+! Font
+! URxvt.font: xft:Source Code Pro:size=10, -adobe-source code pro-*-*-*-*-*-*-*-*-*-*-*-*
+! URxvt.boldFont: xft:Source Code Pro:size=10, -adobe-source code pro-*-*-*-*-*-*-*-*-*-*-*-*
+! URxvt.italicFont: xft:Source Code Pro:size=10, -adobe-source code pro-*-*-*-*-*-*-*-*-*-*-*-*
+! URxvt.boldItalicFont: xft:Source Code Pro:size=10, -adobe-source code pro-*-*-*-*-*-*-*-*-*-*-*-*
+
+ URxvt.allow_bold:   false
+ URxvt.font:        xft:Oxygen Mono-8
+! URxvt.font:        xft:Roboto Mono-8
+
+! Color
+! URxvt.colorBD: #B5BD68 ! bold
+! URxvt.colorIT: #B294BB ! italic
+! URxvt.colorUL: #81A2BE ! underline
+
+
+! bold
+URxvt.colorBD: #974F87
+! italic
+URxvt.colorIT: #CB772F
+! underline
+URxvt.colorUL: #CB772F
+
+!! URxvt.borderColor:      #373B41
+!! URxvt.background: [80]#373B41
+!! URxvt.fading:              25
+URxvt.fading:              15
+URxvt*transparent:        false
+URxvt*.borderLess:	   false
+!! URxvt*depth: 32
+URxvt.geometry: 90x30
+URxvt.loginShell: true
+URxvt.internalBorder: 10
+URxvt.letterSpace: -1
+URxvt.lineSpace: 0
+URxvt*.scrollBar: false
+URxvt*.scrollBar_right: true
+! URxvt*scrollstyle: plain
+URxvt*shading: 95
+URxvt.saveLines:	    	65535
+! URxvt*skipBuiltinGlyphs: true
+URxvt*urgentOnBell: True
+URxvt*visualBell:          true
+URxvt*.mouseWheelScrollPage: true
+
+!URxvt*modifier:control
+
+
+! Scrollbar
+!URxvt.scrollStyle:          plain
+!URxvt.scrollBar:            true
+!URxvt*scrollTtyOutput:      false
+!URxvt*scrollBar_right:      true
+
+! Extensions ~/.urxvt./ext
+URxvt.perl-ext-common: default,matcher,clipboard,keyboard-select,url-select,font-size
+
+! Disable iso14755 to unbind ctrl+shift key
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! Keyboard-select
+URxvt.keysym.C-Escape: perl:keyboard-select:activate
+URxvt.keysym.C-S-S: perl:keyboard-select:search
+
+! Url-select
+URxvt.keysym.C-S-U: perl:url-select:select_next
+URxvt.url-select.autocopy: true
+URxvt.url-select.button: 1
+URxvt.url-select.launcher: /usr/bin/firefox
+URxvt.url-select.underline: true
+
+!URxvt.keysym.C-S-W: perl:clipboard:paste_escaped
+URxvt.clipboard.copycmd:  xsel -i -b
+URxvt.clipboard.pastecmd: xsel -o -b
+
+
+! Clipboard
+URxvt.keysym.Control-Shift-C: perl:clipboard:copy
+URxvt.keysym.Control-Shift-V: perl:clipboard:paste
+
+
+
+
+
+! resize font on the fly
+! dep. urxvt-resize-font-git
+! URxvt.resize-font.smaller: C-Down
+! URxvt.resize-font.bigger: C-Up
+
+
+! copy/paste
+! URxvt.keysym.C-C:   perl:clipboard:copy
+! URxvt.keysym.C-V:   perl:clipboard:paste
+! URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
+!
+! Reasigning keys for vim keys
+URxvt.keysym.S-Up             : \033[1;2A
+URxvt.keysym.S-Down           : \033[1;2B
+URxvt.keysym.S-Right          : \033[1;2C
+URxvt.keysym.S-Left           : \033[1;2D
+URxvt.keysym.S-Home           : \033[1;2H
+URxvt.keysym.S-End            : \033[1;2F
+URxvt.keysym.M-Up             : \033[1;3A
+URxvt.keysym.M-Down           : \033[1;3B
+URxvt.keysym.M-Right          : \033[1;3C
+URxvt.keysym.M-Left           : \033[1;3D
+URxvt.keysym.M-Page_Up        : \033[5;3~
+URxvt.keysym.M-Page_Down      : \033[6;3~
+URxvt.keysym.M-Home           : \033[1;3H
+URxvt.keysym.M-End            : \033[1;3F
+URxvt.keysym.M-S-Up           : \033[1;4A
+URxvt.keysym.M-S-Down         : \033[1;4B
+URxvt.keysym.M-S-Right        : \033[1;4C
+URxvt.keysym.M-S-Left         : \033[1;4D
+URxvt.keysym.M-S-Home         : \033[1;4H
+URxvt.keysym.M-S-End          : \033[1;4F
+URxvt.keysym.C-Up             : \033[1;5A
+URxvt.keysym.C-Down           : \033[1;5B
+URxvt.keysym.C-Right          : \033[1;5C
+URxvt.keysym.C-Left           : \033[1;5D
+URxvt.keysym.C-Page_Up        : \033[5;5~
+URxvt.keysym.C-Page_Down      : \033[6;5~
+URxvt.keysym.C-Home           : \033[1;5H
+URxvt.keysym.C-End            : \033[1;5F
+URxvt.keysym.C-S-Up           : \033[1;6A
+URxvt.keysym.C-S-Down         : \033[1;6B
+URxvt.keysym.C-S-Right        : \033[1;6C
+URxvt.keysym.C-S-Left         : \033[1;6D
+URxvt.keysym.C-S-Home         : \033[1;6H
+URxvt.keysym.C-S-End          : \033[1;6F
+URxvt.keysym.M-C-Up           : \033[1;7A
+URxvt.keysym.M-C-Down         : \033[1;7B
+URxvt.keysym.M-C-Right        : \033[1;7C
+URxvt.keysym.M-C-Left         : \033[1;7D
+URxvt.keysym.M-C-Page_Up      : \033[5;7~
+URxvt.keysym.M-C-Page_Down    : \033[6;7~
+URxvt.keysym.M-C-Home         : \033[1;7H
+URxvt.keysym.M-C-End          : \033[1;7F
+URxvt.keysym.M-C-S-Up         : \033[1;8A
+URxvt.keysym.M-C-S-Down       : \033[1;8B
+URxvt.keysym.M-C-S-Right      : \033[1;8C
+URxvt.keysym.M-C-S-Left       : \033[1;8D
+URxvt.keysym.M-C-S-Home       : \033[1;8H
+URxvt.keysym.M-C-S-End        : \033[1;8F
+
+! font-size
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
+
+
+
+! #################################
+! #             ROFI              #
+! #################################
+
+rofi.borderwidth: 0
+rofi.padding: 2
+rofi.lines: 25
+rofi.width: -50
+rofi.separator-style: solid
+

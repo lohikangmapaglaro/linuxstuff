@@ -1,0 +1,82 @@
+# Source from ~/.bashrc
+
+# clear screen windows style
+alias cls='clear'
+
+#  list files directory first
+alias ls='ls -F --group-directories-first --color=auto'
+#  list hidden files only, to include directories themselves use 'ls -dF .*' instead
+alias ls.='ls -dF .[a-zA-Z0-9]* --group-directories-first --color=auto'
+
+# long listing format normal
+alias lsl='ls -lhF --group-directories-first --color=auto'
+
+# long listing format hidden
+alias ls.l='ls -ldF .[a-zA-Z0-9]* --group-directories-first --color=auto'
+
+# long listing format all
+alias ll='ls -lahF --group-directories-first --color=auto'
+
+# let me know
+alias rm='rm -I -v'
+alias cp='cp -i -v'
+alias mv='mv -i -v'
+alias rmdir='rmdir -v'
+alias mkdir='mkdir -p -v'
+alias ln='ln -i'
+
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../../'
+
+
+# parents folder?, do it for me please
+alias mkdir='mkdir -p -v'
+
+# colorize output
+alias tree='tree -C'
+alias ping='ping -c 5'
+alias dmesg='dmesg -HL'
+
+
+# ANSI color escape sequence
+alias less='less -R'
+
+# display line numbers
+alias grep='grep -E -i -n --color=auto'
+
+alias df='df -Th --total'
+alias du='du -c -h'
+alias free='free -mt'
+alias openports='ss --all --numeric --processes --ipv4 --ipv6'
+
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+
+
+# requires an argument
+alias diff='colordiff '
+alias psgrep='ps aux | grep -v grep | grep -i -e VSZ -e'
+alias pgg='ps -Af | grep '
+alias histsearch='history | grep '
+alias sudo='sudo '
+alias root='sudo -i'
+
+alias aliasupdate='/usr/bin/vim $HOME/.alias; source $HOME/.alias'
+alias loginmulti='php $HOME/repos/linuxstuff/phpwhat/login.php --user=walbarda --display=multihead --log=normal'
+alias loginsingle='php $HOME/repos/linuxstuff/phpwhat/login.php --user=walbarda --display=singlehead --log=normal'
+
+alias mirrorupdate='sudo reflector --protocol http --latest 30 --number 20 --sort rate --save /etc/pacman.d/mirrorlist '
+alias pacupdate='sudo pacmatic -Syyu'
+alias pacinstall='sudo pacmatic -S '
+alias pacsearch='pacman -Ss '
+
+alias aurmissingpkg='for pkg in $(pacman -Qqm); do cower -s $pkg &>/dev/null || echo "$pkg not in AUR"; done'
+alias aurupdate='yaourt -Syyu --aur'
+alias aurinstall='yaourt -S '
+alias aursearch='yaourt -Ss '
+
+alias localsearch='pacman -Qs '
